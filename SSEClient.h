@@ -17,7 +17,6 @@ private:
     uint8_t *key = (unsigned char*) "0123456789123456";
     uint8_t *iv = (unsigned char*) "0123456789123456";
 
-    unordered_map<long, uint8_t *> derived_keys;
     GGMTree *tree;
     BloomFilter<32, GGM_SIZE, HASH_SIZE> delete_bf;
     unordered_map<string, int> C;       // search time

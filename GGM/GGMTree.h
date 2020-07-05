@@ -8,24 +8,24 @@
 #include <bitset>
 #include <cmath>
 #include <cstring>
+#include <vector>
 
+#include "GGMNode.h"
 extern "C" {
-#include "../Util/CommonUtil.h"
+#include "CommonUtil.h"
 }
 
 using namespace std;
 
 class GGMTree {
 private:
-    long num_node;
     int level;
-    uint8_t msk[AES_BLOCK_SIZE];
-
-    uint8_t *iv = (unsigned char*) "0123456789123456";
 
 public:
-    GGMTree(long num_node, uint8_t *msk);
-    void get_keychain_from_key(uint8_t *current_key, long offset);
+    GGMTree(long num_node);
+    void static derive_key_from_tree(uint8_t *current_key, long offset, int start_level, int target_level);
+    vector<GGMNode> min_coverage(vector<GGMNode> node_list);
+    int get_level() const;
 };
 
 

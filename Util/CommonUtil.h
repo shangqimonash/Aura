@@ -8,8 +8,8 @@
 
 #define AES_BLOCK_SIZE 16
 #define DIGEST_SIZE 32
-#define GGM_SIZE 191702
-#define HASH_SIZE 13
+#define GGM_SIZE 2868
+#define HASH_SIZE 5
 
 int aes_encrypt(unsigned char *plaintext, int plaintext_len,
                 unsigned char *key, unsigned char *iv,

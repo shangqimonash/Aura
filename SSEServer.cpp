@@ -14,7 +14,11 @@ void SSEServer::add_entries(const string& label, const string& tag, vector<strin
     dict[label] = move(ciphertext_list);
 }
 
-vector<int> SSEServer::search(uint8_t *token, unordered_map<long, uint8_t *> keys) {
+vector<int> SSEServer::search(uint8_t *token, vector<GGMNode> node_list, int level) {
+    keys.clear();
+    // pre-search, derive all keys
+    compute_leaf_keys(node_list, level);
+    // get the result
     int counter = 0;
     vector<int> res_list;
     while (true) {
@@ -38,9 +42,25 @@ vector<int> SSEServer::search(uint8_t *token, unordered_map<long, uint8_t *> key
             aes_decrypt((uint8_t *) (ciphertext_list[i].c_str() + AES_BLOCK_SIZE), ciphertext_list[i].size() - AES_BLOCK_SIZE,
                         keys[search_pos[i]], (uint8_t *) ciphertext_list[i].c_str(),
                         res);
-            res_list.emplace_back(*((int*) res));
+            if(*((int*) res) > 0) {
+                res_list.emplace_back(*((int*) res));
+            }
             break;
         }
     }
     return res_list;
+}
+
+void SSEServer::compute_leaf_keys(const vector<GGMNode>& node_list, int level) {
+    for(GGMNode node : node_list) {
+        for (int i = 0; i < pow(2, level - node.level); ++i) {
+            uint8_t derive_key[AES_BLOCK_SIZE];
+            memcpy(derive_key, node.key, AES_BLOCK_SIZE);
+            GGMTree::derive_key_from_tree(derive_key, 2 * (level - node.level) * (node.index) + i, level - node.level, 0);
+            if(keys.find(node.index + i) == keys.end()) {
+                keys[node.index + i] = (uint8_t*) malloc(AES_BLOCK_SIZE);
+                memcpy(keys[node.index + i], derive_key, AES_BLOCK_SIZE);
+            }
+        }
+    }
 }

@@ -15,10 +15,11 @@
 #include <unordered_map>
 #include <utility>
 
-#include "BF/BloomFilter.h"
+#include "BloomFilter.h"
 extern "C" {
-#include "../Util/CommonUtil.h"
+#include "CommonUtil.h"
 }
+#include "GGMTree.h"
 
 using namespace chrono;
 using namespace std;
@@ -27,10 +28,13 @@ class SSEServer {
 private:
     unordered_map<string, string> tags;
     unordered_map<string, vector<string>> dict;
+    unordered_map<long, uint8_t*> keys;
+
+    void compute_leaf_keys(const vector<GGMNode>& node_list, int level);
 public:
     SSEServer();
     void add_entries(const string& label, const string& tag, vector<string> ciphertext_list);
-    vector<int> search(uint8_t *token, unordered_map<long, uint8_t *> keys);
+    vector<int> search(uint8_t *token, vector<GGMNode> node_list, int level);
 };
 
 

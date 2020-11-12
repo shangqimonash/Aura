@@ -11,7 +11,7 @@ ADD_EXECUTABLE(Aura main.cpp SSEClient.cpp SSEServer.cpp GGM/GGMTree.cpp BF/Hash
 
 ADD_EXECUTABLE(AESTest Test/AESTest.cpp Util/CommonUtil.c)
 
-ADD_EXECUTABLE(BloomFilterTest BF/Hash/SpookyV2.cpp)
+ADD_EXECUTABLE(BloomFilterTest Test/BloomFilterTest.cpp BF/Hash/SpookyV2.cpp)
 
 TARGET_LINK_LIBRARIES(Aura OpenSSL::Crypto)
 

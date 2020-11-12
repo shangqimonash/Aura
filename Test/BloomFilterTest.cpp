@@ -16,4 +16,6 @@ int main() {
     cout << "tag1:" << bf.might_contain(&tag1) << endl;
     cout << "tag2:" << bf.might_contain(&tag2) << endl;
     cout << "tag3:" << bf.might_contain(&tag3) << endl;
+
+    return 0;
 }

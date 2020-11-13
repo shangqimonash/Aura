@@ -13,7 +13,11 @@ ADD_EXECUTABLE(AESTest Test/AESTest.cpp Util/CommonUtil.c)
 
 ADD_EXECUTABLE(BloomFilterTest Test/BloomFilterTest.cpp BF/Hash/SpookyV2.cpp)
 
+ADD_EXECUTABLE(GGMTest Test/GGMTest.cpp GGM/GGMTree.cpp Util/CommonUtil.c)
+
 TARGET_LINK_LIBRARIES(Aura OpenSSL::Crypto)
 
 TARGET_LINK_LIBRARIES(AESTest OpenSSL::Crypto)
+
+TARGET_LINK_LIBRARIES(GGMTest OpenSSL::Crypto)
 

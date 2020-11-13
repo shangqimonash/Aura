@@ -13,7 +13,7 @@ class GGMNode {
 public:
     long index;
     int level;
-    uint8_t key[AES_BLOCK_SIZE];
+    uint8_t key[AES_BLOCK_SIZE]{};
 
     GGMNode(long index, int level) {
         this->index = index;

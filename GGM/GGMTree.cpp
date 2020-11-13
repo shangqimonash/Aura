@@ -39,7 +39,7 @@ vector<GGMNode> GGMTree::min_coverage(vector<GGMNode> node_list) {
     }
 
     // no merge return
-    if (next_level_node.size() == node_list.size() || next_level_node.size() == 0) {
+    if (next_level_node.size() == node_list.size() || next_level_node.empty()) {
         return node_list;
     }
 

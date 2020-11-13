@@ -54,12 +54,13 @@ vector<int> SSEServer::search(uint8_t *token, vector<GGMNode> node_list, int lev
 void SSEServer::compute_leaf_keys(const vector<GGMNode>& node_list, int level) {
     for(GGMNode node : node_list) {
         for (int i = 0; i < pow(2, level - node.level); ++i) {
+            int offset = ((node.index) << (level - node.level)) + i;
             uint8_t derive_key[AES_BLOCK_SIZE];
             memcpy(derive_key, node.key, AES_BLOCK_SIZE);
-            GGMTree::derive_key_from_tree(derive_key, 2 * (level - node.level) * (node.index) + i, level - node.level, 0);
-            if(keys.find(node.index + i) == keys.end()) {
-                keys[node.index + i] = (uint8_t*) malloc(AES_BLOCK_SIZE);
-                memcpy(keys[node.index + i], derive_key, AES_BLOCK_SIZE);
+            GGMTree::derive_key_from_tree(derive_key,  offset, level - node.level, 0);
+            if(keys.find(offset) == keys.end()) {
+                keys[offset] = (uint8_t*) malloc(AES_BLOCK_SIZE);
+                memcpy(keys[offset], derive_key, AES_BLOCK_SIZE);
             }
         }
     }

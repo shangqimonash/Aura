@@ -2,8 +2,8 @@
 // Created by shangqi on 2020/6/17.
 //
 
-#ifndef AURA_SSESERVER_H
-#define AURA_SSESERVER_H
+#ifndef AURA_SSESERVERHANDLER_H
+#define AURA_SSESERVERHANDLER_H
 
 #include <algorithm>
 #include <chrono>
@@ -24,7 +24,7 @@ extern "C" {
 using namespace chrono;
 using namespace std;
 
-class SSEServer {
+class SSEServerHandler {
 private:
     unordered_map<string, string> tags;
     unordered_map<string, vector<string>> dict;
@@ -32,10 +32,10 @@ private:
 
     void compute_leaf_keys(const vector<GGMNode>& node_list, int level);
 public:
-    SSEServer();
+    SSEServerHandler();
     void add_entries(const string& label, const string& tag, vector<string> ciphertext_list);
-    vector<int> search(uint8_t *token, vector<GGMNode> node_list, int level);
+    vector<int> search(uint8_t *token, const vector<GGMNode>& node_list, int level);
 };
 
 
-#endif //AURA_SSESERVER_H
+#endif //AURA_SSESERVERHANDLER_H

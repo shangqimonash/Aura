@@ -1,17 +1,17 @@
-#include "SSEClient.h"
+#include "SSEClientHandler.h"
 
-SSEClient::SSEClient() {
-    server = new SSEServer();
+SSEClientHandler::SSEClientHandler() {
+    server = new SSEServerHandler();
     // init the GGM Tree
     tree = new GGMTree(GGM_SIZE);
 }
 
-SSEClient::~SSEClient() {
+SSEClientHandler::~SSEClientHandler() {
     delete_bf.reset();
     delete server;
 }
 
-void SSEClient::update(OP op, const string& keyword, int ind) {
+void SSEClientHandler::update(OP op, const string& keyword, int ind) {
     // compute the tag
     uint8_t pair[keyword.size() + sizeof(int)];
     memcpy(pair, keyword.c_str(), keyword.size());
@@ -65,7 +65,7 @@ void SSEClient::update(OP op, const string& keyword, int ind) {
     }
 }
 
-vector<int> SSEClient::search(const string& keyword) {
+vector<int> SSEClientHandler::search(const string& keyword) {
     // token
     cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
     uint8_t token[DIGEST_SIZE];

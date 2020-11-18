@@ -2,19 +2,19 @@
 // Created by shangqi on 2020/6/17.
 //
 
-#include "SSEServer.h"
+#include "Core/SSEServerHandler.h"
 
-SSEServer::SSEServer() {
+SSEServerHandler::SSEServerHandler() {
     tags.clear();
     dict.clear();
 }
 
-void SSEServer::add_entries(const string& label, const string& tag, vector<string> ciphertext_list) {
+void SSEServerHandler::add_entries(const string& label, const string& tag, vector<string> ciphertext_list) {
     tags[label] = tag;
     dict[label] = move(ciphertext_list);
 }
 
-vector<int> SSEServer::search(uint8_t *token, vector<GGMNode> node_list, int level) {
+vector<int> SSEServerHandler::search(uint8_t *token, const vector<GGMNode>& node_list, int level) {
     keys.clear();
     // pre-search, derive all keys
     compute_leaf_keys(node_list, level);
@@ -51,7 +51,7 @@ vector<int> SSEServer::search(uint8_t *token, vector<GGMNode> node_list, int lev
     return res_list;
 }
 
-void SSEServer::compute_leaf_keys(const vector<GGMNode>& node_list, int level) {
+void SSEServerHandler::compute_leaf_keys(const vector<GGMNode>& node_list, int level) {
     for(GGMNode node : node_list) {
         for (int i = 0; i < pow(2, level - node.level); ++i) {
             int offset = ((node.index) << (level - node.level)) + i;

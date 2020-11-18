@@ -21,22 +21,11 @@ void SSEClient::update(OP op, const string& keyword, int ind) {
     sha256_digest(pair, keyword.size() + sizeof(int), tag);
     // process the operator
     if(op == INS) {
-        // token
-        uint8_t token[DIGEST_SIZE];
-        hmac_digest((uint8_t*) keyword.c_str(), keyword.size(),
-                key, AES_BLOCK_SIZE,
-                token);
-        // label
-        int counter = C[keyword];
-        uint8_t label[DIGEST_SIZE];
-        hmac_digest((uint8_t*) &counter, sizeof(int),
-                token, DIGEST_SIZE,
-                label);
-        C[keyword]++;
         // get all offsets in BF
         vector<long> indexes = BloomFilter<32, GGM_SIZE, HASH_SIZE>::get_index(tag);
         sort(indexes.begin(), indexes.end());
 
+        // get SRE ciphertext list
         vector<string> ciphertext_list;
         for(long index : indexes) {
             // derive a key from the offset
@@ -52,6 +41,19 @@ void SSEClient::update(OP op, const string& keyword, int ind) {
             // save the encrypted id in the list
             ciphertext_list.emplace_back(string((char*) encrypted_id, AES_BLOCK_SIZE + sizeof(int)));
         }
+
+        // token
+        uint8_t token[DIGEST_SIZE];
+        hmac_digest((uint8_t*) keyword.c_str(), keyword.size(),
+                key, AES_BLOCK_SIZE,
+                token);
+        // label
+        int counter = C[keyword];
+        uint8_t label[DIGEST_SIZE];
+        hmac_digest((uint8_t*) &counter, sizeof(int),
+                token, DIGEST_SIZE,
+                label);
+        C[keyword]++;
         // convert tag/label to string
         string tag_str((char*) tag, DIGEST_SIZE);
         string label_str((char*) label, DIGEST_SIZE);

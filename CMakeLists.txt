@@ -29,7 +29,7 @@ ADD_EXECUTABLE(BloomFilterTest Test/BloomFilterTest.cpp BF/Hash/SpookyV2.cpp)
 ADD_EXECUTABLE(GGMTest Test/GGMTest.cpp GGM/GGMTree.cpp Util/CommonUtil.c)
 ADD_EXECUTABLE(SSETest Test/SSETest.cpp Core/SSEClientHandler.cpp Core/SSEServerHandler.cpp GGM/GGMTree.cpp BF/Hash/SpookyV2.cpp Util/CommonUtil.c)
 ADD_EXECUTABLE(AuraServer Core/SSEServer.cpp Core/SSEServerHandler.cpp GGM/GGMTree.cpp BF/Hash/SpookyV2.cpp Util/CommonUtil.c gen-cpp)
-ADD_EXECUTABLE(AuraClient main.cpp Core/SSEServer.cpp Core/SSEServerHandler.cpp GGM/GGMTree.cpp BF/Hash/SpookyV2.cpp Util/CommonUtil.c gen-cpp)
+ADD_EXECUTABLE(AuraClient main.cpp Core/SSEClient.cpp GGM/GGMTree.cpp BF/Hash/SpookyV2.cpp Util/CommonUtil.c gen-cpp)
 
 # link
 TARGET_LINK_LIBRARIES(AESTest OpenSSL::Crypto)

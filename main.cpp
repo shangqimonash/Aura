@@ -1,4 +1,4 @@
-#include "SSEClient.h"
+#include "Core/SSEClient.h"
 
 int main() {
     SSEClient client;
@@ -8,10 +8,13 @@ int main() {
         client.update(INS, "test", i);
     }
     cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 10000; ++i) {
         client.update(DEL, "test", i);
     }
 
     vector<int> results = client.search("test");
+//    for (int res : results) {
+//        cout << res << endl;
+//    }
     return 0;
 }

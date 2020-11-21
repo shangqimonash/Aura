@@ -5,7 +5,7 @@
 #ifndef AURA_SSESERVER_H
 #define AURA_SSESERVER_H
 
-#include <thrift/server/TThreadedServer.h>
+#include <thrift/server/TSimpleServer.h>
 #include <thrift/transport/TBufferTransports.h>
 #include <thrift/transport/TSocket.h>
 
@@ -26,7 +26,7 @@ private:
 public:
     SSEServer();
     void add_entries(const string& label, const string& tag, const vector<string>& ciphertext_list) override;
-    void search(std::vector<int>& _return, const string& token, const std::vector<SerialisedNode> & node_list, int32_t level) override;
+    void search(std::vector<int32_t>& _return, const string& token, const std::vector<SerialisedNode> & node_list, int32_t level) override;
 };
 
 

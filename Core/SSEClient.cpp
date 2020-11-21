@@ -9,7 +9,7 @@ SSEClient::SSEClient() {
     tree = new GGMTree(GGM_SIZE);
     // establish connection with the server
     shared_ptr<TTransport> socket(new TSocket("localhost", 9090));
-    transport = shared_ptr<TTransport>(new TBufferedTransport(socket));
+    transport = shared_ptr<TTransport>(new TFramedTransport(socket));
     shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
     server = new SSEServiceClient(protocol);
     transport->open();
@@ -114,9 +114,9 @@ vector<int> SSEClient::search(const string& keyword) {
         searialised_list.emplace_back(sn);
     }
     // give all results to the server for search
-    cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
     vector<int> res;
+//    cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
     server->search(res, string((char*) token, DIGEST_SIZE), searialised_list, tree->get_level());
-    cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
+//    cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
     return res;
 }

@@ -4,7 +4,7 @@ This repository contains the implementation of Aura, a non-interactive dynamic s
 
 
 
-##Requirements
+## Requirements
 
 * Git
 * Ubuntu 18.04
@@ -15,7 +15,7 @@ This repository contains the implementation of Aura, a non-interactive dynamic s
 
 
 
-##Building
+## Building
 
 ```bash
 git clone https://github.com/MonashCybersecurityLab/Aura.git

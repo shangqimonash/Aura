@@ -21,9 +21,9 @@ void SSEServer::search(std::vector<int32_t> & _return, const string &token, cons
         received_nodes.emplace_back(node.index, node.level, (uint8_t*) node.key.c_str());
     }
     // search for the result
-    cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
+//    cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
     _return = handler->search((uint8_t*) token.c_str(), received_nodes, level);
-    cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
+//    cout << duration_cast<microseconds>(system_clock::now().time_since_epoch()).count() << endl;
 }
 
 int main() {

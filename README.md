@@ -39,7 +39,7 @@ All the above executable files can be executed without extra parameters.
 
 ## Feedback
 
-- [Submit an issue](https://github.com/MonashCybersecurityLab/Aura/issues/new)
+- [Submit an issue](https://github.com/shangqimonash/Aura/issues/new)
 - Email the authors: shifeng.sun@monash.edu, shangqi.lai@monash.edu
 
 

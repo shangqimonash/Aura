@@ -31,7 +31,7 @@ make
 
 ## Usage
 
-After compiling the project, three executable files of Aura will be generated. The first one is `SSETest`, which runs Aura client and server operations as a local procedure. This can be used to evaluate the performance of Aura with no communication cost. The other two files (`AuraServer` and `AuraClient`)  can be used to execute Aura in a networked environment. Particularly, the `AuraServer` starts an Apache Thrift server which can process the setup, update, query operations from the `AuraClient`.
+After compiling the project, three executable files of Aura will be generated. The first one is `SSETest`, which runs Aura client and server operations as a local procedure. This can be used to evaluate the performance of Aura with no communication cost. The other two files (`AuraServer` and `AuraClient`)  can be used to execute Aura in a networked environment. Particularly, the `AuraServer` starts an Apache Thrift server which can process the setup, update, query operations from the `AuraClient`. The results from these two executable file reflect the performance of Aura in real-world networks.
 
 All the above executable files can be executed without extra parameters.
 
